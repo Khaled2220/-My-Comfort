@@ -6,7 +6,7 @@
 
 <div class="form-container">
 
-    <h2 class="text-center">Edit User</h2>
+    <h2 >Edit User</h2>
 
     @php
         $selectedUserType = (string) old(
@@ -15,7 +15,6 @@
         );
     @endphp
 
-    {{-- Validation Errors --}}
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -33,80 +32,41 @@
             @csrf
             @method('PUT')
 
-            {{-- Full Name --}}
-            <div class="form-group">
 
+            <div class="form-group">
                 <label for="full_name">Full Name:</label>
 
-                <input
-                    type="text"
-                    name="full_name"
-                    id="full_name"
-                    class="form-control"
-                    value="{{ old('full_name', $user->full_name) }}"
-                    maxlength="250"
-                    required
-                >
+                <input type="text" name="full_name" id="full_name" class="form-control" value="{{ old('full_name', $user->full_name) }}" maxlength="250" required >
 
                 @error('full_name')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
 
-            </div>
-
-            {{-- Email --}}
-            <div class="form-group">
+                <br>
 
                 <label for="email">Email:</label>
 
-                <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    class="form-control"
-                    value="{{ old('email', $user->email) }}"
-                    maxlength="225"
-                    required
-                >
+                <input type="email" name="email" id="email" class="form-control" value="{{ old('email', $user->email) }}" maxlength="225" required >
 
                 @error('email')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
 
-            </div>
-
-            {{-- Password --}}
-            <div class="form-group">
+                <br>
 
                 <label for="password">Password:</label>
 
-                <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    class="form-control"
-                    placeholder="Leave empty to keep current password"
-                    minlength="7"
-                    autocomplete="new-password"
-                >
+                <input type="password" name="password" id="password" class="form-control" placeholder="Leave empty to keep current password" minlength="7" autocomplete="new-password" >
 
                 @error('password')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
 
-            </div>
-
-            {{-- User Type --}}
-            <div class="form-group">
+                <br>
 
                 <label for="user_type">User Type:</label>
 
-                <select
-                    name="user_type"
-                    id="user_type"
-                    class="form-control"
-                    required
-                >
+                <select name="user_type" id="user_type" class="form-control" required >
 
                     <option value="1" {{ $selectedUserType === '1' ? 'selected' : '' }}>
                         Admin
@@ -124,7 +84,6 @@
 
             </div>
 
-            {{-- Form Actions --}}
             <div class="form-actions">
 
                 <button type="submit" class="btn btn-update">
@@ -134,13 +93,10 @@
                 <a href="{{ route('user.index') }}" class="btn btn-back">
                     Back
                 </a>
-
             </div>
-
         </form>
 
     @else
-
         <div class="alert alert-danger">
             You are not authorized to update this user.
         </div>
@@ -148,9 +104,6 @@
         <a href="{{ route('user.index') }}" class="btn btn-back">
             Back
         </a>
-
     @endcan
-
 </div>
-
 @endsection
